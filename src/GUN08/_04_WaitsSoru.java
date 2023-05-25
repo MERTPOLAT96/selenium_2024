@@ -1,12 +1,17 @@
 package GUN08;
 
 import Utility.BaseDriver;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 /*
@@ -21,7 +26,7 @@ public class _04_WaitsSoru extends BaseDriver {
 
 
     @Test
-    public void Test1(){
+    public void Test1() throws IOException {
 
         driver.get("https://www.demoblaze.com/index.html");
 
@@ -39,6 +44,14 @@ public class _04_WaitsSoru extends BaseDriver {
 
         WebElement mainpage= driver.findElement(By.id("nava"));
         mainpage.click();
+
+        TakesScreenshot ts=(TakesScreenshot) driver; //1. aşama ekran görüntüsü alma değişkenini tanımladım
+
+        File hafızadakihali=ts.getScreenshotAs(OutputType.FILE);  // 2. aşama ekran görüntüsü alındı, hafızada
+
+        // hafızadaki bu bilgiyi dosya olarak kaydet.
+
+        FileUtils.copyFile(hafızadakihali, new File("ekrangoruntuleri\\screenshot.png"));
 
 
 
