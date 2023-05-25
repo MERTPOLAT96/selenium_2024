@@ -2,6 +2,8 @@ package Utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 import java.util.logging.Level;
@@ -21,13 +23,17 @@ public class BaseDriver {
         Logger logger= Logger.getLogger(""); // sisteme ait bütün logları üreten objeye/servise ulaştım ""
         logger.setLevel(Level.SEVERE); // Sadece errorları göster
 
-        // gerekmeyen logları kaldıracağız
 
-        // System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
 
-        driver=new ChromeDriver();
+         System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
 
-        driver.manage().window().maximize(); // ekranı max yapıyor
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver=new ChromeDriver(options);
+
+        //driver=new ChromeDriver();
+
+        //driver.manage().window().maximize(); // ekranı max yapıyor
 
         Duration dr=Duration.ofSeconds(30);
         driver.manage().timeouts().pageLoadTimeout(dr);
